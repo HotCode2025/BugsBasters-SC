@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/BugsBaster-SC.iml" filepath="$PROJECT_DIR$/.idea/BugsBaster-SC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/CicloFor.java/CicloFor.java.iml" filepath="$PROJECT_DIR$/java/CicloFor.java/CicloFor.java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/EjercicioDoWhile.java/EjercicioDoWhile.java.iml" filepath="$PROJECT_DIR$/java/EjercicioDoWhile.java/EjercicioDoWhile.java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/JavaApplication16/JavaApplication16.iml" filepath="$PROJECT_DIR$/java/JavaApplication16/JavaApplication16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/breack-continue/breack-continue.iml" filepath="$PROJECT_DIR$/java/breack-continue/breack-continue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ciclo-05/ciclo-05.iml" filepath="$PROJECT_DIR$/ciclo-05/ciclo-05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ciclo03/ciclo03.iml" filepath="$PROJECT_DIR$/ciclo03/ciclo03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ciclo04-2/ciclo04-2.iml" filepath="$PROJECT_DIR$/ciclo04-2/ciclo04-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ciclos03/ciclos03.iml" filepath="$PROJECT_DIR$/ciclos03/ciclos03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cilco-05-2/cilco-05-2.iml" filepath="$PROJECT_DIR$/cilco-05-2/cilco-05-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cilos04/cilos04.iml" filepath="$PROJECT_DIR$/cilos04/cilos04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/labels/labels.iml" filepath="$PROJECT_DIR$/java/labels/labels.iml" />
+    </modules>
+  </component>
+</project>
