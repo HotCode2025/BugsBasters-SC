@@ -5,29 +5,29 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-//creamos la funcion preguntar para mostrarla cada vez que necesitemos
-function preguntar() {
-  rl.question("Ingrese el año: ", (input) => {
-    let anio = parseInt(input);
+function pedirNumero() {
+  rl.question("Digite un número (mayor o igual a 0): ", (input) => {
+    let num = parseInt(input);
 
-    //definimos cuando es un año bisiesto, si no lo cumple entonces NO es bisiesto
-    if ((anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0)) {
-      console.log(`El año ${anio} es BISIESTO.`);
+    if (num < 0) {
+      console.log("El número debe ser mayor o igual a 0.");
+      pedirNumero(); // volver a preguntar
     } else {
-      console.log(`El año ${anio} NO es bisiesto.`);
-    }
+      let factorial = 1;
+      let i = 1;
 
-    //damos la opcion al usuario para ver si desea continuar
-    rl.question("¿Desea continuar? Digite 1 para seguir, otro número para salir: ", (op) => {
-      if (op === "1") {
-        preguntar(); // vuelve a iniciar
-      } else {
-        console.log("Programa finalizado.");
-        rl.close();
-      }
-    });
+      // Ciclo do...while
+      do {
+        factorial *= i;
+        i++;
+      } while (i <= num);
+
+      console.log(`El factorial de ${num} es: ${factorial}`);
+      rl.close();
+    }
   });
 }
 
-preguntar();
+pedirNumero();
+
 
