@@ -1,0 +1,41 @@
+ackage Operaciones;
+
+public class Aritmetica {
+  int a; 
+  int b;
+  
+  public void sumarNumeros(){
+      int resultado = a + b;
+      System.out.println("resultado = " + resultado);
+  }
+  
+  public int sumarConRetorno(){
+      //int resultado = a + b;
+      return a + b; 
+  }
+  
+  public int sumarConArgumentos(int arg1, int arg2){
+      a = arg1;
+      b = arg2;
+      return a + b;
+  }
+}
+
+package Operaciones;
+//5.1
+public class PruebaAritmetica {
+    public static void main(String[] args) {
+        Aritmetica aritmetica1 = new Aritmetica();
+        aritmetica1.a = 3;
+        aritmetica1.b = 7;
+        aritmetica1.sumarNumeros();
+//5.2
+        int resultado = aritmetica1.sumarConRetorno();
+        System.out.println("resultado = " + resultado);
+//5.3
+        resultado = aritmetica1.sumarConArgumentos(12,26);
+        System.out.println("Resultado usando argumentos = " + resultado);
+        
+    }
+}
+
