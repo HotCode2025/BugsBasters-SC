@@ -18,7 +18,7 @@ public class Ciclos10 {
                 suma += numero;
                 contador++;
             } else {
-                System.out.println("Número fuera de rango");
+                System.out.println("Número fuera de rango, intente de nuevamente");
             }
         }
 
