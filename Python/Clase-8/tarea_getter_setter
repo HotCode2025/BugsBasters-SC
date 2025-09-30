@@ -1,0 +1,53 @@
+class Persona:
+    def __init__(self, nombre, edad):
+        self.__nombre = nombre
+        self.__edad = edad
+
+    # Getter y Setter para nombre
+    def get_nombre(self):
+        return self.__nombre
+    
+    def set_nombre(self, nombre):
+        self.__nombre = nombre
+
+    # Getter y Setter para edad
+    def get_edad(self):
+        return self.__edad
+    
+    def set_edad(self, edad):
+        if edad > 0:
+            self.__edad = edad
+        else:
+            print("La edad debe ser positiva")
+
+    # Método para mostrar detalles
+    def mostrar_detalles(self):
+        print(f"Nombre: {self.__nombre}, Edad: {self.__edad}")
+
+
+# Crear 3 objetos
+p1 = Persona("Rodrigo", 25)
+p2 = Persona("María", 30)
+p3 = Persona("Luis", 40)
+
+# Mostrar detalles iniciales
+print("Detalles iniciales:")
+p1.mostrar_detalles()
+p2.mostrar_detalles()
+p3.mostrar_detalles()
+
+# Modificar con setters
+p1.set_nombre("Rodri")
+p1.set_edad(26)
+
+p2.set_nombre("María José")
+p2.set_edad(31)
+
+p3.set_nombre("Luis Alberto")
+p3.set_edad(41)
+
+# Mostrar cambios
+print("\nDetalles después de modificaciones:")
+p1.mostrar_detalles()
+p2.mostrar_detalles()
+p3.mostrar_detalles()
