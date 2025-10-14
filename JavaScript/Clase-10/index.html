@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 10 | Proyecto Ventas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🛒 Sistema de Gestión de Ventas (JavaScript POO)</h1>
+        <p>Abre la **Consola del Desarrollador (F12)** para ver la ejecución del código de las clases Producto y Orden.</p>
+    </header>
+
+    <main>
+        <section class="ejecucion">
+            <h2>Ejecución de la Clase VendedorTest</h2>
+            <p>El código JavaScript se ejecuta al cargar la página, creando y mostrando los detalles de las órdenes en la consola.</p>
+            
+            <button onclick="ejecutarPrueba()">Volver a Ejecutar Prueba</button>
+
+            <div id="resultado-demo">
+                <h3>Instrucciones</h3>
+                <ol>
+                    <li>Abre la Consola del navegador (F12).</li>
+                    <li>Ve a la pestaña "Console".</li>
+                    <li>Observa la creación de Productos, la agregación a las Órdenes y los resultados finales.</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Proyecto Tarea - Clases JavaScript</p>
+    </footer>
+
+    <script src="clases.js"></script>
+
+    <script>
+        function ejecutarPrueba() {
+            // Asume que la clase VendedorTest y su método ejecutarLaPrueba están disponibles
+            const programaVentas = new VendedorTest();
+            programaVentas.ejecutarLaPrueba();
+        }
+        // Llamada inicial para ejecutar el código al cargar la página (si no está en clases.js)
+        // La ejecución está en el final del código de VendedorTest, por lo que no hace falta llamarla aquí si ya está allí.
+    </script>
+</body>
+</html>
