@@ -73,4 +73,4 @@ class VendedorTest {
         console.log("========== PRUEBA FINALIZADA ==========");
     }
 }
-new VendedorTest().ejecutarPrueba();
+new VendedorTest().ejecutarLaPrueba();
