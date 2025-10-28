@@ -1,0 +1,32 @@
+@startuml
+' --- Estilo para que coincida con la imagen ---
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' --- Clase Padre ---
+class Vehiculo <<Vehiculo>> {
+  -color: str
+  -ruedas: int
+  __init__(color, ruedas)
+  __str__()
+}
+
+' --- Clases Hijas ---
+class Auto <<Auto>> {
+  -velocidad: int
+  __init__(color, ruedas, velocidad)
+  __str__()
+}
+
+class Bicicleta <<Bicicleta>> {
+  -tipo: str
+  __init__(color, ruedas, tipo)
+  __str__()
+}
+
+' --- Relaciones de Herencia ---
+Vehiculo <|-- Auto : extends
+Vehiculo <|-- Bicicleta : extends
+
+@enduml

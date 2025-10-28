@@ -1,0 +1,29 @@
+@startuml
+' Para un estilo más limpio, similar a la imagen
+skinparam classAttributeIconSize 0 
+
+class Persona {
+  -nombre
+  -edad
+}
+
+class Empleado {
+  -sueldo
+}
+
+' Relación de herencia: Empleado "extiende" a Persona
+Persona <|-- Empleado
+
+@enduml
+@startuml
+' Diagrama de la jerarquía de clases
+
+class Object
+class Persona
+class Empleado
+
+' Cadena de herencia
+Object <|-- Persona
+Persona <|-- Empleado
+
+@enduml
