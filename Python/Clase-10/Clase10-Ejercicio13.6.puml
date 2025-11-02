@@ -1,0 +1,30 @@
+@startuml
+' --- Estilo para que coincida con la imagen ---
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' --- Definición de la Clase ---
+class Persona {
+  -nombre: str
+  -edad: int
+  mostrar_detalle()
+}
+
+' --- Definición de los Objetos (Instancias) ---
+object "persona1: Persona" {
+  nombre: str = "Ariel"
+  edad: int = 40
+}
+
+object "persona2: Persona" {
+  nombre: str = "Osvaldo"
+  edad: int = 40
+}
+
+' --- Relación de Instancia ---
+' Muestra que los objetos son instancias de la clase Persona
+Persona <.. "persona1: Persona" : instanceOf
+Persona <.. "persona2: Persona" : instanceOf
+
+@enduml

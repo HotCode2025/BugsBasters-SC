@@ -1,0 +1,38 @@
+@startuml
+' --- Estilo para que coincida con la imagen ---
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' --- Clases Padre ---
+' "FiguraGeometrica" es una clase abstracta
+abstract class FiguraGeometrica <<FiguraGeometrica>> {
+  -alto
+  -ancho
+  ' "area()" es un método abstracto
+  + {abstract} area()
+}
+
+class Color <<Color>> {
+  +color
+}
+
+' --- Clases Hijas ---
+class Cuadrado <<Cuadrado>> {
+  ' "area()" es la implementación del método abstracto
+  +area()
+}
+
+class Rectangulo <<Rectangulo>> {
+  ' "area()" es la implementación del método abstracto
+  +area()
+}
+
+' --- Relaciones de Herencia ---
+FiguraGeometrica <|-- Cuadrado : extends
+Color <|-- Cuadrado : extends
+
+FiguraGeometrica <|-- Rectangulo : extends
+Color <|-- Rectangulo : extends
+
+@enduml
