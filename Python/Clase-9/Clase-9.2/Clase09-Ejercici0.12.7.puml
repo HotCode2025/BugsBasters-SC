@@ -1,0 +1,43 @@
+@startuml
+' --- Estilo para que coincida con la imagen ---
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' --- Clases Padre ---
+class FiguraGeometrica <<FiguraGeometrica>> {
+  -alto
+  -ancho
+  +get_alto()
+  +set_alto(alto)
+  +get_ancho()
+  +set_ancho(ancho)
+  +__str__()
+}
+
+class Color <<Color>> {
+  -color
+  +get_color()
+  +set_color(color)
+  +__str__()
+}
+
+' --- Clases Hijas ---
+class Cuadrado <<Cuadrado>> {
+  +area()
+  +__str__()
+}
+
+class Rectangulo <<Rectangulo>> {
+  +area()
+  +__str__()
+}
+
+' --- Relaciones de Herencia ---
+FiguraGeometrica <|-- Cuadrado : extends
+Color <|-- Cuadrado : extends
+
+FiguraGeometrica <|-- Rectangulo : extends
+Color <|-- Rectangulo : extends
+
+@enduml

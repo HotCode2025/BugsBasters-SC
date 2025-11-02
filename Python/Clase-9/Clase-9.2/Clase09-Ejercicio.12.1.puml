@@ -1,0 +1,27 @@
+@startuml
+' --- Estilo para que coincida con la imagen ---
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' --- Clases Padre ---
+class FiguraGeometrica <<FiguraGeometrica>> {
+  +alto
+  +ancho
+}
+
+class Color <<Color>> {
+  +color
+}
+
+' --- Clase Hija ---
+class Cuadrado <<Cuadrado>> {
+  +area()
+}
+
+' --- Relaciones de Herencia Múltiple ---
+' Cuadrado hereda de FiguraGeometrica y de Color
+FiguraGeometrica <|-- Cuadrado : extends
+Color <|-- Cuadrado : extends
+
+@enduml
