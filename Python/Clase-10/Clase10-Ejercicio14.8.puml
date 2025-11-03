@@ -1,0 +1,29 @@
+@startuml
+' --- Estilo para que coincida con la imagen ---
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+class Orden <<Orden>> {
+  ' "contador_ordenes" es una variable de clase (estática)
+  + {static} contador_ordenes: int
+  - id_orden: int
+  ' La imagen muestra "Producto lis...", asumo "productos: list"
+  - productos: list
+  + __str__()
+}
+
+class Producto <<Producto>> {
+  ' "contador_productos" es una variable de clase (estática)
+  + {static} contador_productos: int
+  - id_producto: int
+  - nombre: str
+  - precio: float
+  + __str__()
+}
+
+' --- Relación de Agregación ---
+' "Orden" (el todo) "agrega" "Producto" (la parte)
+Orden o-- Producto : aggregates
+
+@enduml
