@@ -44,6 +44,55 @@ public class ProyectoIntegradorHall {
         }
     }
 
+     /* ---------------- subprocesos (especialidades) ---------------- */
+
+    /*--subproceso de Geriatria--*/
+    //Autor: Lourdes
+
+    static String geriatria(Paciente p) {
+        System.out.println();
+        System.out.println("* Geriatría *");
+        System.out.println("===========================");
+        System.out.println("* Historial médico: *");
+        System.out.println("===========================");
+
+        boolean tuvoHistoria = readYesNo("¿Ha padecido alguna enfermedad crónica, alergias u otro? (si/no): ");
+        if (tuvoHistoria) {
+            System.out.println("¿Cuál es su padecimiento?");
+            System.out.println("1. Enfermedad crónica");
+            System.out.println("2. Alergia");
+            System.out.println("3. Otro");
+            int opcion2;
+            while (true) {
+                opcion2 = readInt("Ingrese opción (1/2/3): ");
+                if (opcion2 >= 1 && opcion2 <= 3) break;
+                System.out.println("Opción no válida.");
+            }
+            if (opcion2 == 1) {
+                String cronic = readLine("¿Qué enfermedad crónica padeció/padece?: ");
+                p.extras.put("Enfermedad_cronica", cronic);
+            } else if (opcion2 == 2) {
+                String alergia = readLine("¿A qué es alérgico/a?: ");
+                p.extras.put("Alergia", alergia);
+            } else {
+                String otros = readLine("Describa su situación: ");
+                p.extras.put("Otros_geriatria", otros);
+            }
+        }
+
+        boolean tomaMedicamento = readYesNo("¿Toma algún medicamento recetado? (si/no): ");
+        if (tomaMedicamento) {
+            String medicamento = readLine("¿Cuál?: ");
+            String razon = readLine("¿Para qué?: ");
+            //almacena las respuestas
+            p.extras.put("Medicamento", medicamento);
+            p.extras.put("Razon_medicamento", razon);
+        }
+
+        return "Evaluación geriátrica registrada.";
+    }
+
+
     // Proceso de registro en secretaría
     static Paciente registrarPaciente() {
         Paciente p = new Paciente();
