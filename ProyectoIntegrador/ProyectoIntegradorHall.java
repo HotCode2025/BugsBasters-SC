@@ -6,9 +6,9 @@ package proyectointegradorhall;
 import java.util.*;
 
 public class ProyectoIntegradorHall {
-    
+
     static Scanner sc = new Scanner(System.in);
-    
+
     /** Clase para contener datos del paciente */
     static class Paciente {
         String nombre = "";
@@ -23,15 +23,16 @@ public class ProyectoIntegradorHall {
         String horaCita = "";
         String obraSocial = "";
     }
-    
+
     // Métodos de entrada validada
     static String readLine(String prompt) {
         System.out.print(prompt);
         String s = sc.nextLine();
-        if (s == null) return "";
+        if (s == null)
+            return "";
         return s.trim();
     }
-    
+
     static int readInt(String prompt) {
         while (true) {
             String s = readLine(prompt);
@@ -42,17 +43,17 @@ public class ProyectoIntegradorHall {
             }
         }
     }
-    
+
     // Proceso de registro en secretaría
     static Paciente registrarPaciente() {
         Paciente p = new Paciente();
-        
+
         System.out.println("========================================");
         System.out.println("*     HALL DE ENTRADA - SECRETARÍA     *");
         System.out.println("========================================");
         System.out.println("¡Buenos días! Voy a necesitar algunos datos sobre el paciente entrante.");
         System.out.println();
-        
+
         p.nombre = readLine("Ingrese el nombre del paciente: ");
         p.apellido = readLine("Ingrese el apellido del paciente: ");
         p.fechaNacimiento = readLine("Fecha de nacimiento del paciente (dd/mm/aaaa): ");
@@ -64,10 +65,10 @@ public class ProyectoIntegradorHall {
         p.fechaCita = readLine("Fecha de la cita (dd/mm/aaaa): ");
         p.horaCita = readLine("Hora de la cita (hh:mm): ");
         p.obraSocial = readLine("Obra social (si tiene): ");
-        
+
         return p;
     }
-    
+
     // Selección de especialidad médica
     static String seleccionarEspecialidad() {
         int opcion;
@@ -79,20 +80,26 @@ public class ProyectoIntegradorHall {
             System.out.println("3. Kinesiología");
             System.out.println("4. Odontología");
             opcion = readInt("Ingrese opción (1-4): ");
-            
-            if (opcion >= 1 && opcion <= 4) break;
+
+            if (opcion >= 1 && opcion <= 4)
+                break;
             System.out.println("Opción inválida. Ingrese 1, 2, 3 o 4.");
         }
-        
+
         switch (opcion) {
-            case 1: return "Cardiología";
-            case 2: return "Psicología";
-            case 3: return "Kinesiología";
-            case 4: return "Odontología";
-            default: return "No especificada";
+            case 1:
+                return "Cardiología";
+            case 2:
+                return "Psicología";
+            case 3:
+                return "Kinesiología";
+            case 4:
+                return "Odontología";
+            default:
+                return "No especificada";
         }
     }
-    
+
     // Mostrar resumen del paciente
     static void mostrarResumenPaciente(Paciente p, String especialidad) {
         System.out.println();
@@ -108,18 +115,98 @@ public class ProyectoIntegradorHall {
         System.out.println("================================");
         System.out.println("Registro completo. Gracias.");
     }
-    
+
     // Ejemplo de uso completo
     public static void main(String[] args) {
         // Registro del paciente
         Paciente paciente = registrarPaciente();
-        
+
         // Selección de especialidad
         String especialidad = seleccionarEspecialidad();
-        
+
         // Mostrar resumen
         mostrarResumenPaciente(paciente, especialidad);
-        
+
+        sc.close();
+    }
+}
+
+public class SistomaSintomas {
+
+    static Scanner sc = new Scanner(System.in);
+
+    // Método para leer respuesta sí/no
+    static boolean readYesNo(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String s = sc.nextLine().trim().toLowerCase();
+            if (s.equals("si") || s.equals("s"))
+                return true;
+            if (s.equals("no") || s.equals("n"))
+                return false;
+            System.out.println("Respuesta inválida. Escriba 'si' o 'no'.");
+        }
+    }
+
+    // Sistema de preguntas de síntomas
+    static List<String> evaluarSintomas() {
+        System.out.println();
+        System.out.println("===================================");
+        System.out.println("  EVALUACIÓN DE SÍNTOMAS");
+        System.out.println("===================================");
+        System.out.println("Le haremos unas preguntas sobre los síntomas del paciente.");
+        System.out.println();
+
+        // Array de síntomas disponibles
+        String[] sintomasArray = {
+                "Fiebre",
+                "Tos",
+                "Dolor de cabeza",
+                "Fatiga",
+                "Dolor de garganta",
+                "Dificultad para respirar",
+                "Pérdida del olfato",
+                "Dolores musculares",
+                "Escalofríos",
+                "Congestión nasal"
+        };
+
+        // Lista para guardar síntomas detectados
+        List<String> sintomasDetectados = new ArrayList<>();
+
+        // Preguntar por cada síntoma
+        for (String sintoma : sintomasArray) {
+            boolean tiene = readYesNo("¿Tiene " + sintoma + "? (si/no): ");
+            if (tiene) {
+                sintomasDetectados.add(sintoma);
+            }
+        }
+
+        return sintomasDetectados;
+    }
+
+    // Método para mostrar resultados
+    static void mostrarSintomas(List<String> sintomas) {
+        System.out.println();
+        System.out.println("===================================");
+        System.out.println("  SÍNTOMAS DETECTADOS");
+        System.out.println("===================================");
+
+        if (sintomas.isEmpty()) {
+            System.out.println("- Ningún síntoma reportado");
+        } else {
+            System.out.println("Total de síntomas: " + sintomas.size());
+            for (String s : sintomas) {
+                System.out.println("- " + s);
+            }
+        }
+        System.out.println("===================================");
+    }
+
+    // Ejemplo de uso
+    public static void main(String[] args) {
+        List<String> sintomas = evaluarSintomas();
+        mostrarSintomas(sintomas);
         sc.close();
     }
 }
