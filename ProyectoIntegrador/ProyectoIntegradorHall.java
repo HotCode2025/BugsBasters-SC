@@ -22,6 +22,7 @@ public class ProyectoIntegradorHall {
         String fechaCita = "";
         String horaCita = "";
         String obraSocial = "";
+        Map<String,String> extras = new HashMap<>(); // para guardar datos adicionales
     }
 
     // Métodos de entrada validada
@@ -43,6 +44,24 @@ public class ProyectoIntegradorHall {
             }
         }
     }
+
+        static boolean readYesNo(String prompt) {
+        while (true) {
+            String s = readLine(prompt).toLowerCase();
+            if (s.equals("si") || s.equals("s")) return true;
+            if (s.equals("no") || s.equals("n")) return false;
+            System.out.println("Respuesta inválida. Escriba 'si' o 'no'.");
+        }
+    }
+
+    static String readOption(String prompt, Set<String> validOptionsLower) {
+        while (true) {
+            String s = readLine(prompt).toLowerCase();
+            if (validOptionsLower.contains(s)) return s;
+            System.out.println("Opción inválida. Intente nuevamente.");
+        }
+    }
+
 
      /* ---------------- subprocesos (especialidades) ---------------- */
 
