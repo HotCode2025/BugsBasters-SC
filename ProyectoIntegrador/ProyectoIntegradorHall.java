@@ -111,6 +111,74 @@ public class ProyectoIntegradorHall {
         return "Evaluación geriátrica registrada.";
     }
 
+    static String psicologiaPediatra(Patient p) {
+        System.out.printIn();
+        
+        System.out.println("==============================================");
+        System.out.println("Área de diagnóstico psicológico pediátrico:");
+        System.out.println("==============================================");
+
+        // Usamos edad ya conocida en Patient, si no estaba, pedimos
+        if (p.edad <= 0) {
+            p.edad = readInt("Ingrese la edad del niño: ");
+        } else {
+            System.out.println("Edad registrada: " + p.edad);
+        }
+
+        boolean cambiosComportamiento = readYesNo("¿Ha notado cambios en el comportamiento de su hijo? (si/no): ");
+        boolean cambiosApetito = readYesNo("¿Ha notado cambios en su apetito? (si/no): ");
+        boolean interacciona = readYesNo("¿El niño interactúa con otras personas? (si/no): ");
+        boolean asiste = readYesNo("¿Asiste al jardín/colegio? (si/no): ");
+        String relacionCompaneros = "bien";
+        if (asiste) {
+            relacionCompaneros = readOption("¿Cómo se lleva con sus compañeros? (bien/mal): ",
+                    new HashSet<>(Arrays.asList("bien","mal")));
+        }
+        boolean manifiestaEmociones = readYesNo("¿Manifiesta miedo, tristeza o ansiedad? (si/no): ");
+
+        String diagnostico;
+        if (cambiosComportamiento || manifiestaEmociones || cambiosApetito) {
+            diagnostico = "Hay algo que preocupa en el comportamiento del niño. Se aconseja consulta con especialista.";
+        } else if (!interacciona || relacionCompaneros.equals("mal")) {
+            diagnostico = "Posible conducta social problemática. Evaluar entorno social y escolar.";
+        } else {
+            diagnostico = "No se observan signos claros en esta evaluación inicial.";
+        }
+
+        return diagnostico;
+    }
+
+    static String psicologiaGeneral(Patient p) {
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println("Área de diagnóstico psicológico:");
+        System.out.println("=================================");
+
+        String estadoAnimo = readOption(
+                "¿Cómo describiría su estado de ánimo últimamente? (feliz/triste/ansioso/neutral): ",
+                new HashSet<>(Arrays.asList("feliz","triste","ansioso","neutral"))
+        );
+
+        boolean duermeBien = readYesNo("¿Duerme bien por las noches? (si/no): ");
+        boolean cambiosApetito = readYesNo("¿Ha notado cambios en su apetito? (si/no): ");
+        boolean motivacion = readYesNo("¿Se siente con motivación para hacer sus actividades diarias? (si/no): ");
+        boolean aislamiento = readYesNo("¿Evita estar con otros? (si/no): ");
+
+        String diagnostico;
+        if (estadoAnimo.equals("triste") && !duermeBien && !motivacion && aislamiento) {
+            diagnostico = "Posibles signos de depresión.";
+        } else if (estadoAnimo.equals("ansioso") && !duermeBien) {
+            diagnostico = "Posibles signos de ansiedad.";
+        } else if (estadoAnimo.equals("neutral") && !motivacion) {
+            diagnostico = "Estrés leve. Observar.";
+        } else {
+            diagnostico = "Estado emocional estable.";
+        }
+
+        return diagnostico;
+    }
+
+    }
 
     // Proceso de registro en secretaría
     static Paciente registrarPaciente() {
