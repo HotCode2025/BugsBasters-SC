@@ -227,6 +227,37 @@ public class ProyectoIntegradorHall {
         p.horaCita = readLine("Hora de la cita (hh:mm): ");
         p.obraSocial = readLine("Obra social (si tiene): ");
 
+        String diagnosticoPediatrico = "";
+        // Si es adulto mayor -> geriatría
+        if (p.edad >= 70) {
+            String g = geriatria(p);
+            p.extras.put("Geriatria_eval", g);
+        } else if (p.edad <= 18) {
+            // Recolección de datos pediátricos básicos
+            System.out.println();
+            System.out.println("=================================");
+            System.out.println("Área de diagnóstico Pediátrico");
+            System.out.println("=================================");
+            boolean prematuro = readYesNo("¿Fue un bebé prematuro? (si/no): ");
+            int caminarMeses = readInt("¿A los cuántos meses pudo aprender a caminar? (numero): ");
+            boolean contactoToxico = readYesNo("¿Tuvo contacto con algún tipo de toxina o tabaco? (si/no): ");
+            boolean alergias = readYesNo("¿Tiene algún tipo de alergias? (si/no): ");
+            boolean higiene = readYesNo("¿Mantiene la higiene como prioridad? (si/no): ");
+            boolean vacunas = readYesNo("¿Tiene las vacunas al día? (si/no): ");
+
+            // Evaluación simple
+            if (prematuro && caminarMeses > 15) {
+                diagnosticoPediatrico = "Desarrollo psicomotor lento. Consulte con especialista.";
+            } else if (contactoToxico || alergias) {
+                diagnosticoPediatrico = "Riesgo de infecciones respiratorias o complicaciones. Evaluar con profesional.";
+            } else if (!higiene || !vacunas) {
+                diagnosticoPediatrico = "Niño vulnerable a contraer infecciones. Actualizar cuidados y vacunas.";
+            } else {
+                diagnosticoPediatrico = "El niño parece estar sano según esta evaluación inicial.";
+            }
+            p.extras.put("Diagnostico_pediatrico", diagnosticoPediatrico);
+        }
+
         return p;
     }
 
