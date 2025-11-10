@@ -148,6 +148,31 @@ public class ProyectoIntegradorHall {
         return diagnostico;
     }
 
+    static String odontologia(Patient p) {
+        System.out.println();
+        System.out.println("===================================");
+        System.out.println(" Área de diagnóstico Odontológico ");
+        System.out.println("===================================");
+
+        Set<String> opcionesValidas = new HashSet<>(Arrays.asList("chequeo","limpieza","radiografia","ortodoncia"));
+        String consulta = readOption("¿Cuál es su consulta? (chequeo / limpieza / radiografia / ortodoncia): ", opcionesValidas);
+
+        // Solo 'limpieza' y 'chequeo' se atienden como consulta inmediata en recepción
+        while (!consulta.equals("limpieza") && !consulta.equals("chequeo")) {
+            System.out.println("Este tipo de consulta requiere derivación. Será atendido en la fecha asignada.");
+            consulta = readOption("Por favor, ingrese nuevamente su consulta (limpieza o chequeo): ", new HashSet<>(Arrays.asList("limpieza","chequeo","radiografia","ortodoncia")));
+        }
+
+        String diagnostico;
+        if (consulta.equals("limpieza")) {
+            diagnostico = "Placa bacteriana detectada. Recomendado limpieza profunda cada 6 meses.";
+        } else {
+            diagnostico = "Dientes en buen estado. Se sugiere control anual.";
+        }
+
+        return "Consulta: " + consulta + ". Diagnóstico odontológico: " + diagnostico;
+    }
+
     static String psicologiaGeneral(Patient p) {
         System.out.println();
         System.out.println("=================================");
