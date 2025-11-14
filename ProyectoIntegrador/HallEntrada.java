@@ -1,16 +1,20 @@
-package proyectointegradorhall;
-
-// Fragmento para repositorio grupal - Hall de Entrada Secretaría
-// Autor: Cande
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 
 import java.util.*;
 
-public class ProyectoIntegradorHall {
+/**
+ 
+ */
+public class HallEntrada {
 
+    // Scanner único para todo el programa (UTF-8 si la JVM lo soporta)
     static Scanner sc = new Scanner(System.in);
 
-    /** Clase para contener datos del paciente */
-    static class Paciente {
+    /** Clase para contener datos del paciente y datos extra */
+    static class Patient {
         String nombre = "";
         String apellido = "";
         String fechaNacimiento = "";
@@ -22,10 +26,10 @@ public class ProyectoIntegradorHall {
         String fechaCita = "";
         String horaCita = "";
         String obraSocial = "";
-        Map<String,String> extras = new HashMap<>(); // para guardar datos adicionales
+        Map<String, String> extras = new HashMap<>(); // para guardar datos adicionales
     }
 
-    // Métodos de entrada validada
+    /* ---------------- utilidades de entrada ---------------- */
     static String readLine(String prompt) {
         System.out.print(prompt);
         String s = sc.nextLine();
@@ -45,11 +49,13 @@ public class ProyectoIntegradorHall {
         }
     }
 
-        static boolean readYesNo(String prompt) {
+    static boolean readYesNo(String prompt) {
         while (true) {
             String s = readLine(prompt).toLowerCase();
-            if (s.equals("si") || s.equals("s")) return true;
-            if (s.equals("no") || s.equals("n")) return false;
+            if (s.equals("si") || s.equals("s"))
+                return true;
+            if (s.equals("no") || s.equals("n"))
+                return false;
             System.out.println("Respuesta inválida. Escriba 'si' o 'no'.");
         }
     }
@@ -57,18 +63,15 @@ public class ProyectoIntegradorHall {
     static String readOption(String prompt, Set<String> validOptionsLower) {
         while (true) {
             String s = readLine(prompt).toLowerCase();
-            if (validOptionsLower.contains(s)) return s;
+            if (validOptionsLower.contains(s))
+                return s;
             System.out.println("Opción inválida. Intente nuevamente.");
         }
     }
 
+    /* ---------------- subprocesos (especialidades) ---------------- */
 
-     /* ---------------- subprocesos (especialidades) ---------------- */
-
-    /*--subproceso de Geriatria--*/
-    //Autor: Lourdes
-
-    static String geriatria(Paciente p) {
+    static String geriatria(Patient p) {
         System.out.println();
         System.out.println("* Geriatría *");
         System.out.println("===========================");
@@ -84,7 +87,8 @@ public class ProyectoIntegradorHall {
             int opcion2;
             while (true) {
                 opcion2 = readInt("Ingrese opción (1/2/3): ");
-                if (opcion2 >= 1 && opcion2 <= 3) break;
+                if (opcion2 >= 1 && opcion2 <= 3)
+                    break;
                 System.out.println("Opción no válida.");
             }
             if (opcion2 == 1) {
@@ -103,7 +107,6 @@ public class ProyectoIntegradorHall {
         if (tomaMedicamento) {
             String medicamento = readLine("¿Cuál?: ");
             String razon = readLine("¿Para qué?: ");
-            //almacena las respuestas
             p.extras.put("Medicamento", medicamento);
             p.extras.put("Razon_medicamento", razon);
         }
@@ -112,8 +115,7 @@ public class ProyectoIntegradorHall {
     }
 
     static String psicologiaPediatra(Patient p) {
-        System.out.printIn();
-        
+        System.out.println();
         System.out.println("==============================================");
         System.out.println("Área de diagnóstico psicológico pediátrico:");
         System.out.println("==============================================");
@@ -132,7 +134,7 @@ public class ProyectoIntegradorHall {
         String relacionCompaneros = "bien";
         if (asiste) {
             relacionCompaneros = readOption("¿Cómo se lleva con sus compañeros? (bien/mal): ",
-                    new HashSet<>(Arrays.asList("bien","mal")));
+                    new HashSet<>(Arrays.asList("bien", "mal")));
         }
         boolean manifiestaEmociones = readYesNo("¿Manifiesta miedo, tristeza o ansiedad? (si/no): ");
 
@@ -148,31 +150,6 @@ public class ProyectoIntegradorHall {
         return diagnostico;
     }
 
-    static String odontologia(Patient p) {
-        System.out.println();
-        System.out.println("===================================");
-        System.out.println(" Área de diagnóstico Odontológico ");
-        System.out.println("===================================");
-
-        Set<String> opcionesValidas = new HashSet<>(Arrays.asList("chequeo","limpieza","radiografia","ortodoncia"));
-        String consulta = readOption("¿Cuál es su consulta? (chequeo / limpieza / radiografia / ortodoncia): ", opcionesValidas);
-
-        // Solo 'limpieza' y 'chequeo' se atienden como consulta inmediata en recepción
-        while (!consulta.equals("limpieza") && !consulta.equals("chequeo")) {
-            System.out.println("Este tipo de consulta requiere derivación. Será atendido en la fecha asignada.");
-            consulta = readOption("Por favor, ingrese nuevamente su consulta (limpieza o chequeo): ", new HashSet<>(Arrays.asList("limpieza","chequeo","radiografia","ortodoncia")));
-        }
-
-        String diagnostico;
-        if (consulta.equals("limpieza")) {
-            diagnostico = "Placa bacteriana detectada. Recomendado limpieza profunda cada 6 meses.";
-        } else {
-            diagnostico = "Dientes en buen estado. Se sugiere control anual.";
-        }
-
-        return "Consulta: " + consulta + ". Diagnóstico odontológico: " + diagnostico;
-    }
-
     static String psicologiaGeneral(Patient p) {
         System.out.println();
         System.out.println("=================================");
@@ -181,8 +158,7 @@ public class ProyectoIntegradorHall {
 
         String estadoAnimo = readOption(
                 "¿Cómo describiría su estado de ánimo últimamente? (feliz/triste/ansioso/neutral): ",
-                new HashSet<>(Arrays.asList("feliz","triste","ansioso","neutral"))
-        );
+                new HashSet<>(Arrays.asList("feliz", "triste", "ansioso", "neutral")));
 
         boolean duermeBien = readYesNo("¿Duerme bien por las noches? (si/no): ");
         boolean cambiosApetito = readYesNo("¿Ha notado cambios en su apetito? (si/no): ");
@@ -203,11 +179,105 @@ public class ProyectoIntegradorHall {
         return diagnostico;
     }
 
+    static String kinesiologia(Patient p) {
+        System.out.println();
+        System.out.println("=====================================");
+        System.out.println("Área de diagnóstico kinesiológico:");
+        System.out.println("=====================================");
+
+        String tipoDolor = readOption(
+                "¿Siente dolor muscular, articular o ambas? (muscular/articular/ambas): ",
+                new HashSet<>(Arrays.asList("muscular", "articular", "ambas")));
+
+        boolean actDificultad = readYesNo("¿Tiene dificultad para realizar ciertas actividades? (si/no): ");
+        boolean rangoMovimiento = readYesNo("¿Muestra limitación en el rango de movimiento? (si/no): ");
+        boolean perdidaFuerza = readYesNo("¿Siente pérdida de fuerza? (si/no): ");
+        boolean tratPrevio = readYesNo("¿Ha recibido tratamiento previo para este problema? (si/no): ");
+
+        String diagnostico;
+        if (tipoDolor.equals("muscular") && actDificultad && rangoMovimiento && perdidaFuerza && tratPrevio) {
+            diagnostico = "Posibles signos de fatiga muscular. Se recomienda descanso prolongado de 48 a 72 horas y reevaluación.";
+        } else if (tipoDolor.equals("articular") && actDificultad) {
+            diagnostico = "Se recomienda examen físico de las articulaciones (buscar hinchazón, movilidad, sensibilidad).";
+        } else if (tipoDolor.equals("ambas") && rangoMovimiento) {
+            diagnostico = "Dolencia muscular y articular severa. Buscar atención médica para diagnóstico y tratamiento.";
+        } else {
+            diagnostico = "No se detectan síntomas relevantes. Estado físico estable.";
+        }
+
+        return diagnostico;
     }
 
-    // Proceso de registro en secretaría
-    static Paciente registrarPaciente() {
-        Paciente p = new Paciente();
+    static String cardiologico(Patient p) {
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println(" Área de diagnóstico Cardiológico ");
+        System.out.println("=================================");
+
+        boolean dolorPecho = readYesNo("¿Ha tenido dolor de pecho últimamente? (si/no): ");
+        int nivelDolor = -1;
+        if (dolorPecho) {
+            while (true) {
+                nivelDolor = readInt("Escala del 0 al 10 (0 = nada, 10 = máximo): ");
+                if (nivelDolor >= 0 && nivelDolor <= 10)
+                    break;
+                System.out.println("Ingrese un valor entre 0 y 10.");
+            }
+        }
+        boolean palpitaciones = readYesNo("¿Palpitaciones? (si/no): ");
+        boolean mareo = readYesNo("¿Mareos o desmayos? (si/no): ");
+        boolean edema = readYesNo("¿Hinchazón (edema)? (si/no): ");
+        boolean hipertension = readYesNo("¿Hipertensión? (si/no): ");
+        boolean colesterol = readYesNo("¿Colesterol alto? (si/no): ");
+        boolean diabetes = readYesNo("¿Diabetes? (si/no): ");
+
+        String diagnostico;
+        if (dolorPecho && nivelDolor >= 7) {
+            diagnostico = "Alto riesgo. Derivar a urgencias.";
+        } else if (dolorPecho && palpitaciones) {
+            diagnostico = "Posible arritmia o isquemia. Se sugiere realizar ECG.";
+        } else if (hipertension || colesterol || diabetes) {
+            diagnostico = "Riesgo cardiovascular. Requiere seguimiento médico.";
+        } else if (edema || mareo) {
+            diagnostico = "Posible insuficiencia cardíaca o problema hemodinámico. Evaluar.";
+        } else {
+            diagnostico = "Riesgo bajo. Control rutinario recomendado.";
+        }
+
+        return diagnostico;
+    }
+
+    static String odontologia(Patient p) {
+        System.out.println();
+        System.out.println("===================================");
+        System.out.println(" Área de diagnóstico Odontológico ");
+        System.out.println("===================================");
+
+        Set<String> opcionesValidas = new HashSet<>(Arrays.asList("chequeo", "limpieza", "radiografia", "ortodoncia"));
+        String consulta = readOption("¿Cuál es su consulta? (chequeo / limpieza / radiografia / ortodoncia): ",
+                opcionesValidas);
+
+        // Solo 'limpieza' y 'chequeo' se atienden como consulta inmediata en recepción
+        while (!consulta.equals("limpieza") && !consulta.equals("chequeo")) {
+            System.out.println("Este tipo de consulta requiere derivación. Será atendido en la fecha asignada.");
+            consulta = readOption("Por favor, ingrese nuevamente su consulta (limpieza o chequeo): ",
+                    new HashSet<>(Arrays.asList("limpieza", "chequeo", "radiografia", "ortodoncia")));
+        }
+
+        String diagnostico;
+        if (consulta.equals("limpieza")) {
+            diagnostico = "Placa bacteriana detectada. Recomendado limpieza profunda cada 6 meses.";
+        } else {
+            diagnostico = "Dientes en buen estado. Se sugiere control anual.";
+        }
+
+        return "Consulta: " + consulta + ". Diagnóstico odontológico: " + diagnostico;
+    }
+
+    /* ---------------- proceso principal (hall de entrada) ---------------- */
+
+    static void hallEntrada() {
+        Patient p = new Patient();
 
         System.out.println("========================================");
         System.out.println("*     HALL DE ENTRADA - SECRETARÍA     *");
@@ -258,42 +328,66 @@ public class ProyectoIntegradorHall {
             p.extras.put("Diagnostico_pediatrico", diagnosticoPediatrico);
         }
 
-        return p;
-    }
+        System.out.println();
+        System.out.println("Le haremos unas preguntas guiadas sobre los síntomas del paciente.");
+        String[] sintomasArray = {
+                "Fiebre", "Tos", "Dolor de cabeza", "Fatiga", "Dolor de garganta",
+                "Dificultad para respirar", "Pérdida del olfato", "Dolores musculares",
+                "Escalofríos", "Congestión nasal"
+        };
 
-    // Selección de especialidad médica
-    static String seleccionarEspecialidad() {
-        int opcion;
+        List<String> sintomasGuardados = new ArrayList<>();
+        for (String s : sintomasArray) {
+            boolean tiene = readYesNo("¿Tiene " + s + "? (si/no): ");
+            if (tiene)
+                sintomasGuardados.add(s);
+        }
+
+        // Selección de especialidad
+        int motivoConsulta;
         while (true) {
             System.out.println();
-            System.out.println("Seleccione el motivo de la consulta para derivación:");
+            System.out.println("Seleccione el motivo de la consulta para derivación más precisa:");
             System.out.println("1. Cardiología");
             System.out.println("2. Psicología");
             System.out.println("3. Kinesiología");
             System.out.println("4. Odontología");
-            opcion = readInt("Ingrese opción (1-4): ");
-
-            if (opcion >= 1 && opcion <= 4)
+            motivoConsulta = readInt("Ingrese (1-4): ");
+            if (motivoConsulta >= 1 && motivoConsulta <= 4)
                 break;
             System.out.println("Opción inválida. Ingrese 1, 2, 3 o 4.");
         }
 
-        switch (opcion) {
-            case 1:
-                return "Cardiología";
-            case 2:
-                return "Psicología";
-            case 3:
-                return "Kinesiología";
-            case 4:
-                return "Odontología";
-            default:
-                return "No especificada";
-        }
-    }
+        String especialidad = "";
+        String diagnosticoEspecialidad = "";
 
-    // Mostrar resumen del paciente
-    static void mostrarResumenPaciente(Paciente p, String especialidad) {
+        switch (motivoConsulta) {
+            case 1:
+                especialidad = "Cardiología";
+                diagnosticoEspecialidad = cardiologico(p);
+                break;
+            case 2:
+                especialidad = "Psicología";
+                if (p.edad <= 18) {
+                    diagnosticoEspecialidad = psicologiaPediatra(p);
+                } else {
+                    diagnosticoEspecialidad = psicologiaGeneral(p);
+                }
+                break;
+            case 3:
+                especialidad = "Kinesiología";
+                diagnosticoEspecialidad = kinesiologia(p);
+                break;
+            case 4:
+                especialidad = "Odontología";
+                diagnosticoEspecialidad = odontologia(p);
+                break;
+            default:
+                especialidad = "No especificada";
+                diagnosticoEspecialidad = "No corresponde";
+        }
+
+        // Resumen final
         System.out.println();
         System.out.println("===== RESUMEN DEL PACIENTE =====");
         System.out.println("Nombre: " + p.nombre + " " + p.apellido);
@@ -303,102 +397,32 @@ public class ProyectoIntegradorHall {
         System.out.println("Domicilio: " + p.domicilio);
         System.out.println("Cita: " + p.fechaCita + " a las " + p.horaCita);
         System.out.println("Obra social: " + p.obraSocial);
-        System.out.println("Especialidad derivada: " + especialidad);
-        System.out.println("================================");
-        System.out.println("Registro completo. Gracias.");
-    }
-
-    // Ejemplo de uso completo
-    public static void main(String[] args) {
-        // Registro del paciente
-        Paciente paciente = registrarPaciente();
-
-        // Selección de especialidad
-        String especialidad = seleccionarEspecialidad();
-
-        // Mostrar resumen
-        mostrarResumenPaciente(paciente, especialidad);
-
-        sc.close();
-    }
-}
-
-public class SistomaSintomas {
-
-    static Scanner sc = new Scanner(System.in);
-
-    // Método para leer respuesta sí/no
-    static boolean readYesNo(String prompt) {
-        while (true) {
-            System.out.print(prompt);
-            String s = sc.nextLine().trim().toLowerCase();
-            if (s.equals("si") || s.equals("s"))
-                return true;
-            if (s.equals("no") || s.equals("n"))
-                return false;
-            System.out.println("Respuesta inválida. Escriba 'si' o 'no'.");
-        }
-    }
-
-    // Sistema de preguntas de síntomas
-    static List<String> evaluarSintomas() {
-        System.out.println();
-        System.out.println("===================================");
-        System.out.println("  EVALUACIÓN DE SÍNTOMAS");
-        System.out.println("===================================");
-        System.out.println("Le haremos unas preguntas sobre los síntomas del paciente.");
-        System.out.println();
-
-        // Array de síntomas disponibles
-        String[] sintomasArray = {
-                "Fiebre",
-                "Tos",
-                "Dolor de cabeza",
-                "Fatiga",
-                "Dolor de garganta",
-                "Dificultad para respirar",
-                "Pérdida del olfato",
-                "Dolores musculares",
-                "Escalofríos",
-                "Congestión nasal"
-        };
-
-        // Lista para guardar síntomas detectados
-        List<String> sintomasDetectados = new ArrayList<>();
-
-        // Preguntar por cada síntoma
-        for (String sintoma : sintomasArray) {
-            boolean tiene = readYesNo("¿Tiene " + sintoma + "? (si/no): ");
-            if (tiene) {
-                sintomasDetectados.add(sintoma);
-            }
-        }
-
-        return sintomasDetectados;
-    }
-
-    // Método para mostrar resultados
-    static void mostrarSintomas(List<String> sintomas) {
-        System.out.println();
-        System.out.println("===================================");
-        System.out.println("  SÍNTOMAS DETECTADOS");
-        System.out.println("===================================");
-
-        if (sintomas.isEmpty()) {
-            System.out.println("- Ningún síntoma reportado");
+        System.out.println("Especialidad: " + especialidad);
+        System.out.println("Síntomas:");
+        if (sintomasGuardados.isEmpty()) {
+            System.out.println("- Ninguno");
         } else {
-            System.out.println("Total de síntomas: " + sintomas.size());
-            for (String s : sintomas) {
+            for (String s : sintomasGuardados) {
                 System.out.println("- " + s);
             }
         }
-        System.out.println("===================================");
+
+        if (p.edad <= 18) {
+            System.out.println("------------------------------------------");
+            System.out.println("Diagnóstico Pediátrico: "
+                    + p.extras.getOrDefault("Diagnostico_pediatrico", diagnosticoPediatrico));
+            System.out.println("------------------------------------------");
+        }
+
+        System.out.println("------------------------------------------");
+        System.out.println("Diagnóstico / Observaciones (" + especialidad + "): " + diagnosticoEspecialidad);
+        System.out.println("------------------------------------------");
+
+        System.out.println("Registro completo. Gracias.");
     }
 
-    // Ejemplo de uso
     public static void main(String[] args) {
-        List<String> sintomas = evaluarSintomas();
-        mostrarSintomas(sintomas);
+        hallEntrada();
         sc.close();
     }
 }
